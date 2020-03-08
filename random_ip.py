@@ -20,5 +20,3 @@ print(ip_addr)
 #方法三
 ip_addr='{0}.{1}.{2}.{3}'.format(random.randint(1,255),random.randint(1,255),random.randint(1,255),random.randint(1,255))
 print(ip_addr)
-
-hello
