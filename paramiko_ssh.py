@@ -16,7 +16,7 @@ def ssh(ip, username, passwd, port=22):
     host_ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     try:
         host_ssh.connect(ip, port=port, username=username, password=passwd, timeout=5, compress=True)
-        print('host connect ok!', host_ssh)
+        print('host connect ok!', '\n'*2)
         return host_ssh
     # 执行连接不成功的异常捕获
     except Exception as e:
@@ -24,10 +24,9 @@ def ssh(ip, username, passwd, port=22):
 
 
 # 操作SSH实例对象
-def term(ipaddress, username, password, port):
-    terminal = ssh(ipaddress, username, password, port)
+def term():
+    terminal = host_info()
     # 实现简易SSH终端输入指令
-    print(type(terminal))
     while True:
         command = input('input <command> or <quit>:')
         if command != "quit":
@@ -43,8 +42,9 @@ def host_info():
     port = input('please input connect port:')
     username = input('please input your username:')
     password = getpass.getpass('please input your password:')
-    term(ipaddress, username, password, port)
+    terminal = ssh(ipaddress, username, password, port)
+    return terminal
 
 
 if __name__ == "__main__":
-    host_info()
+    term()
